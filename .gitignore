@@ -2,3 +2,8 @@ target/
 .metals/
 .metals/metals.log
 .vscode
+project/project
+project/.bloop
+project/metals.sbt
+project/src
+.bloop
