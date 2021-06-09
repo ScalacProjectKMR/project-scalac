@@ -10,4 +10,12 @@ object Dependencies {
   lazy val zioConfig = "dev.zio" %% "zio-config" % "1.0.6"
   lazy val zioConfigMagnolia = "dev.zio" %% "zio-config-magnolia" % "1.0.6"
   lazy val slick = "com.typesafe.slick" %% "slick" % "3.3.3"
+  lazy val zioAkkaInterop = "io.scalac" %% "zio-akka-http-interop" % "0.4.0"
+  lazy val zioMagic ="io.github.kitlangton" %% "zio-magic" % "0.3.2"
+  lazy val zioLogging = "dev.zio" %% "zio-logging" % "0.5.10"
+  lazy val circeCore = "io.circe" %% "circe-core" % "0.14.1"
+  lazy val circeGeneric = "io.circe" %% "circe-generic" % "0.14.1"
+  lazy val circeParser = "io.circe" %% "circe-parser" % "0.14.1"
+  lazy val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe" % "1.36.0"
+  lazy val zioConfigTypesafe = "dev.zio" %% "zio-config-typesafe" % "1.0.6"
 }
