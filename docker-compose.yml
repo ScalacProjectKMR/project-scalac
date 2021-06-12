@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+  postgres:
+    container_name: custom_postgres
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
