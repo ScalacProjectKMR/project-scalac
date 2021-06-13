@@ -1,14 +1,11 @@
 package server.domain.services
 
-import zio.macros.accessible
-import zio.IO
 import server.domain.errors.DatabaseError
+import server.model.Product
+import zio.macros.accessible
+import zio._
 
 @accessible
-object ProductReadService {
-
-  trait Service {
-
-    def getProductById(id: String): IO[DatabaseError, Int]
-  }
+trait ProductReadService {
+  def getById(id: String): IO[DatabaseError, Option[Product]]
 }

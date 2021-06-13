@@ -3,7 +3,6 @@ package server
 import akka.actor.ActorSystem
 import akka.http.interop.HttpServer
 import akka.http.scaladsl.server.Route
-import server.application.{EchoService, SystemService, UserService}
 import zio.{App, ExitCode, URIO, ZEnv, ZIO, ZLayer, ZManaged}
 import zio.config.syntax._
 import zio.logging._
@@ -27,9 +26,6 @@ object Server extends App {
       AppConfig.live.orDie,
       routes,
       Api.live,
-      EchoService.live,
-      UserService.live,
-      SystemService.live,
       logger
     )
 
