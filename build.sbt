@@ -1,8 +1,8 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.13.5"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
+ThisBuild / scalaVersion := "2.13.5"
+ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / organization := "com.example"
 ThisBuild / organizationName := "example"
 
 lazy val root = (project in file("."))
@@ -17,6 +17,7 @@ lazy val root = (project in file("."))
     libraryDependencies += zioConfig,
     libraryDependencies += zioConfigMagnolia,
     libraryDependencies += slick,
+    libraryDependencies += zioSlickInterop,
     libraryDependencies += zioAkkaInterop,
     libraryDependencies += zioMagic,
     libraryDependencies += zioLogging,

@@ -3,11 +3,14 @@ package server
 import akka.actor.ActorSystem
 import akka.http.interop.HttpServer
 import akka.http.scaladsl.server.Route
-import server.application.{ EchoService, SystemService, UserService }
-import zio.{ App, ExitCode, URIO, ZEnv, ZIO, ZLayer, ZManaged }
+import zio.{App, ExitCode, URIO, ZEnv, ZIO, ZLayer, ZManaged}
 import zio.config.syntax._
 import zio.logging._
 import zio.magic._
+import slick.jdbc.PostgresProfile
+import slick.interop.zio.DatabaseProvider
+import server.domain.services.ShopDatabase
+import com.typesafe.config.{Config, ConfigFactory}
 
 object Server extends App {
 
@@ -15,13 +18,14 @@ object Server extends App {
     program.exitCode.injectSome[ZEnv](
       HttpServer.live,
       actorSystem.orDie,
+      databaseConfig.orDie,
+      databaseBackendLayer,
+      DatabaseProvider.live.orDie,
+      ShopDatabase.live,
       httpServerConfig.orDie,
       AppConfig.live.orDie,
       routes,
       Api.live,
-      EchoService.live,
-      UserService.live,
-      SystemService.live,
       logger
     )
 
@@ -35,6 +39,11 @@ object Server extends App {
 
       ZManaged.make(create)(tearDown)
     }
+
+  private val databaseConfig =
+    ZLayer.fromEffect(ZIO(ConfigFactory.load.resolve).map(_.getConfig("database")))
+
+  private val databaseBackendLayer = ZLayer.succeed(PostgresProfile.backend)
 
   private lazy val httpServerConfig =
     AppConfig.live.narrow(_.http)
